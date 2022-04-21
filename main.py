@@ -49,7 +49,7 @@ for i in range(num_points):
     g_values.append(rgb_value[1])
     b_values.append(rgb_value[2])
     
-    print(f"RGB of ({point_x}, {mid_height}) is {rgb_value}.")
+    #print(f"RGB of ({point_x}, {mid_height}) is {rgb_value}.")
 
 
 
@@ -65,17 +65,21 @@ b_polynomial = ""
 
 for i in range(degree + 1):
     if i == 0:
-        r_polynomial += f"The red component is given by {r_coefficients[i]}x^{degree}"
-        g_polynomial += f"The green component is given by {g_coefficients[i]}x^{degree}"
-        b_polynomial += f"The blue component is given by {b_coefficients[i]}x^{degree}"
+        r_polynomial += f"The red component is given by {r_coefficients[i]:.30f}x^{degree}"
+        g_polynomial += f"The green component is given by {g_coefficients[i]:.30f}x^{degree}"
+        b_polynomial += f"The blue component is given by {b_coefficients[i]:.30f}x^{degree}"
     elif i == degree:
-        r_polynomial += f" + {r_coefficients[i]}"
-        g_polynomial += f" + {g_coefficients[i]}"
-        b_polynomial += f" + {b_coefficients[i]}"
+        r_polynomial += f" + {r_coefficients[i]:.30f}"
+        g_polynomial += f" + {g_coefficients[i]:.30f}"
+        b_polynomial += f" + {b_coefficients[i]:.30f}"
+    elif i == degree - 1:
+        r_polynomial += f" + {r_coefficients[i]:.30f}x"
+        g_polynomial += f" + {g_coefficients[i]:.30f}x"
+        b_polynomial += f" + {b_coefficients[i]:.30f}x"
     else:
-        r_polynomial += f" + {r_coefficients[i]}x^{degree - i}"
-        g_polynomial += f" + {g_coefficients[i]}x^{degree - i}"
-        b_polynomial += f" + {b_coefficients[i]}x^{degree - i}"
+        r_polynomial += f" + {r_coefficients[i]:.30f}x^{degree - i}"
+        g_polynomial += f" + {g_coefficients[i]:.30f}x^{degree - i}"
+        b_polynomial += f" + {b_coefficients[i]:.30f}x^{degree - i}"
 
 print(r_polynomial)
 print(g_polynomial)
