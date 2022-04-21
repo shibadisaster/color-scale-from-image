@@ -84,3 +84,44 @@ for i in range(degree + 1):
 print(r_polynomial)
 print(g_polynomial)
 print(b_polynomial)
+
+
+
+new_image = []
+for row in range(10):
+    image_row = []
+    for i in range(scale):
+        pixel = [0, 0, 0]
+        pixel[0] = round(min(max(np.poly1d(r_coefficients)(i), 0), 255))
+        pixel[1] = round(min(max(np.poly1d(g_coefficients)(i), 0), 255))
+        pixel[2] = round(min(max(np.poly1d(b_coefficients)(i), 0), 255))
+        image_row.append(pixel)
+    new_image.append(image_row)
+
+new_image = np.array(new_image, dtype=np.uint8)
+new_image = Image.fromarray(new_image)
+new_image.show()
+
+
+
+#c/o harvey, so far only accurate when scale == width
+if scale == width:
+    print()
+    
+    error = 0
+    for i in range(width):
+        x_positions.append(i)
+        
+        rgb_value = inp.getpixel( (i, mid_height) )
+        
+        r = min(max(np.poly1d(r_coefficients)(i), 0), 255)
+        g = min(max(np.poly1d(g_coefficients)(i), 0), 255)
+        b = min(max(np.poly1d(b_coefficients)(i), 0), 255)
+        
+        error += abs(rgb_value[0] - r)
+        error += abs(rgb_value[1] - g)
+        error += abs(rgb_value[2] - b)
+        
+    print(f"Average error (out of 255): {error/width/3}")
+
+
