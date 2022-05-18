@@ -88,20 +88,20 @@ print(b_polynomial)
 
 
 
-new_image = []
-for row in range(10):
-    image_row = []
-    for i in range(scale):
-        pixel = [0, 0, 0]
-        pixel[0] = round(min(max(np.poly1d(r_coefficients)(i), 0), 255))
-        pixel[1] = round(min(max(np.poly1d(g_coefficients)(i), 0), 255))
-        pixel[2] = round(min(max(np.poly1d(b_coefficients)(i), 0), 255))
-        image_row.append(pixel)
-    new_image.append(image_row)
-
-new_image = np.array(new_image, dtype=np.uint8)
-new_image = Image.fromarray(new_image)
-new_image.show()
+##new_image = []
+##for row in range(10):
+##    image_row = []
+##    for i in range(scale):
+##        pixel = [0, 0, 0]
+##        pixel[0] = round(min(max(np.poly1d(r_coefficients)(i), 0), 255))
+##        pixel[1] = round(min(max(np.poly1d(g_coefficients)(i), 0), 255))
+##        pixel[2] = round(min(max(np.poly1d(b_coefficients)(i), 0), 255))
+##        image_row.append(pixel)
+##    new_image.append(image_row)
+##
+##new_image = np.array(new_image, dtype=np.uint8)
+##new_image = Image.fromarray(new_image)
+##new_image.show()
 
 
 
@@ -135,16 +135,13 @@ print(f"Average error B channel: {b_error / width} / 255")
 
 
 #grayscale colorizing
-grayscale = np.asarray(Image.open("grayscale2.png"))
+grayscale = np.asarray(Image.open("grayscale.png"))
 grayscale = grayscale.tolist()
 
 compressed_grayscale = []
 for row in grayscale:
     compressed_row = []
     for pixel in row:
-        #okay for some reason the grayscale images are read differently, grayscale.png is read as rgb while grayscale2.png gets read as a grayscale image
-        #for grayscale.png this line should be compressed_row.append(pixel[0] * scale / 255) || this just reads red since it should be grayscale anyway
-        #for grayscale2.png this line should be compressed_row.append(pixel * scale / 255)
         compressed_row.append(pixel * scale / 255)
     compressed_grayscale.append(compressed_row)
 
